@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hx-web-assembly" />
+        <module name="hx-web-biz" />
+        <module name="hx-web-common" />
+        <module name="hx-web-dal" />
+        <module name="hx-web-domain" />
+        <module name="hx-web-facade" />
+        <module name="hx-web-template" />
+        <module name="hx-web-test" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
