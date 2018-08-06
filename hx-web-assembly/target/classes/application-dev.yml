@@ -1,0 +1,80 @@
+# mybatis 配置
+mybatis:
+  type-aliases-package: com.hx.spring.boot.platform.dal.dto # 实体映射基础包
+  config-location: classpath:mybatis-config.xml   # mybatis 配置文件
+  mapper-locations: classpath:/mapper/*.xml # mapper文件
+
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper   # mappers 多个接口时逗号隔开，ps:MySqlMapper不能配置 tk.mybatis.mapper.common.Mapper
+  basePackage: com.hx.spring.boot.platform.dal.dao   # dao基础包
+  not-empty: false
+  identity: MYSQL
+
+
+spring:
+  datasource:
+    hikari:
+      master: # 主库
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://hx.mysql.cn:3316/config_server?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useAffectedRows=true
+        username: root
+        password: root,./159357
+        minimum-idle: 5
+        maximum-pool-size: 150
+        auto-commit: true
+        idle-timeout: 30000
+        pool-name: datebookHikariCP
+        max-lifetime: 1800000
+        connection-timeout: 30000
+        connection-test-query: SELECT 1
+      slave: # 从库
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://hx.mysql.cn:3316/config_server?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useAffectedRows=true
+        username: root
+        password: root,./159357
+        minimum-idle: 5
+        maximum-pool-size: 150
+        auto-commit: true
+        idle-timeout: 30000
+        pool-name: datebookHikariCP
+        max-lifetime: 1800000
+        connection-timeout: 30000
+        connection-test-query: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+server:
+  ssl:
+    key-store: classpath:keystore.p12 #classpath:sample.jks
+    key-password: root,.159357 #password
+    key-store-password: root,.159357 #secret
+  http2:
+    enabled: true  # 开启http2
+  undertow:
+    accesslog:
+      dir: E:\devsolft\idea\log
+      enabled: true
+      pattern: common
+      prefix: access_log.
+      rotate: true
+      suffix: log
+    buffer-size: 1024 # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+                       # 每块buffer的空间大小,越小的空间被利用越充分，不要设置太大，以免影响其他应用，合适即可
+    direct-buffers: false # 是否分配的直接内存(NIO直接分配的堆外内存)
+    io-threads: 20  # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+                     # 不要设置过大，如果过大，启动项目会报错：打开文件数过多
+    max-http-post-size: 500
+    worker-threads: 200 # 阻塞任务线程池, 当执行类似servlet请求阻塞IO操作, undertow会从这个线程池中取得线程
+                       # 它的值设置取决于系统线程执行任务的阻塞系数，默认值是IO线程数*8
+  use-forward-headers: true
+
+
+#  jackson:
+#    serialization: true
+
+
+
+
+
+
